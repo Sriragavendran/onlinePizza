@@ -31,16 +31,16 @@ class CustomerServiceImplTest {
 	@Test
      void saveCustomerTest()//test the save customer method
 	{
-		Customer cus = new Customer("ragavan",(long) 978589654,"ragav@gmail.com","tirupur","ragav","ragav123");
+		Customer cus = new Customer("ragavan", "978589654","ragav@gmail.com","tirupur","ragav","ragav123");
 		when(customerRepositry.save(cus)).thenReturn(cus);
 		assertEquals(cus,service.addCustomer(cus));
 	}
 	@Test
 	void viewCustomerTest() {   //test the view customer mehtod
 		ArrayList<Customer> list=new ArrayList<>();
-		Customer cus1 = new Customer("ragavan",(long) 978589654,"ragavan@gmail.com","tirupur","ragavan","ragavan123");
-		Customer cus2 = new Customer("ragav",(long) 978589654,"ragav@gmail.com","tirupur","ragav","ragav123");
-		Customer cus3 = new Customer("sri",(long) 978589654,"sri@gmail.com","tirupur","sri","sri123");
+		Customer cus1 = new Customer("ragavan"," 978589654","ragavan@gmail.com","tirupur","ragavan","ragavan123");
+		Customer cus2 = new Customer("ragav","978589654","ragav@gmail.com","tirupur","ragav","ragav123");
+		Customer cus3 = new Customer("sri", "978589654","sri@gmail.com","tirupur","sri","sri123");
 		list.add(cus1);
 		list.add(cus2);
 		list.add(cus3);
@@ -50,14 +50,14 @@ class CustomerServiceImplTest {
 	}
 	@Test
 	void updateCustomerTest() { //test the update customer method
-		Customer cus1 = new Customer("ragavan",(long) 978589654,"ragavan@gmail.com","tirupur","ragavan","ragavan123");
+		Customer cus1 = new Customer("ragavan"," 978589654","ragavan@gmail.com","tirupur","ragavan","ragavan123");
 		cus1.setCustomerName("sri");
 		when(customerRepositry.save(cus1)).thenReturn(cus1);
 		assertEquals("sri",service.updateCustomer(cus1).getCustomerName());
 	}
 	@Test
 	void viewByIdTest() {  //view the customer using id
-		Optional<Customer> cus1 = Optional.of(new Customer("ragavan",(long) 978589654,"ragavan@gmail.com","tirupur","ragavan","ragavan123"));
+		Optional<Customer> cus1 = Optional.of(new Customer("ragavan", "9785896546","ragavan@gmail.com","tirupur","ragavan","ragavan123"));
 		when(customerRepositry.findById(1)).thenReturn(cus1);
 		assertEquals(true,service.viewCustomer(1).isPresent());
 	}

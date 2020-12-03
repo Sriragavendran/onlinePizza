@@ -2,10 +2,13 @@ package com.onlinepizza.controller;
 
 import java.util.Optional;
 
+import javax.validation.Valid;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpHeaders;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
+import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
@@ -19,6 +22,7 @@ import com.onlinepizza.model.Customer;
 import com.onlinepizza.service.CustomerServiceImpl;
 
 @RestController
+@Validated
 @RequestMapping("/customer") // http://localhost:1206/customer
 public class CustomerController {
 	@Autowired
@@ -31,7 +35,7 @@ public class CustomerController {
 	}
 
 	@PostMapping("/create") // http://localhost:1206/create
-	public ResponseEntity<Boolean> addCustomer(@RequestBody Customer customer) {
+	public ResponseEntity<Boolean> addCustomer(@RequestBody @Valid Customer customer) {
 		customer = service.addCustomer(customer);
 
 		ResponseEntity<Boolean> responseEntity = new ResponseEntity<Boolean>(true, HttpStatus.OK);
@@ -39,7 +43,7 @@ public class CustomerController {
 	}
 
 	@PutMapping("/update") // http://localhost:1206/customer/update
-	public ResponseEntity<String> updateCustomer(@RequestBody Customer customer) {
+	public ResponseEntity<String> updateCustomer(@RequestBody @Valid Customer customer) {
 		customer = service.updateCustomer(customer);
 
 		ResponseEntity<String> responseEntity = new ResponseEntity<String>("Details Updated SuccesFully",
